@@ -1,0 +1,110 @@
+<ui:composition template="/WEB-INF/templates/templateCadastro.xhtml" 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<ui:define name="conteudo">
+	
+		<h:form enctype="multipart/form-data" style="color: black">
+			<p:growl/>
+			
+			<div class="container" style="background-color:#FAFAFA">	
+	
+			<div class="col-lg-12" style="text-align: center; margin-top: 125px">	
+				<img src="IMG/cadastro.png" style="height: 100px; width: 100px; margin-top: 40px"/>	
+			</div> 
+				
+			<br/>
+			
+			<h:panelGrid columns="2">
+				<h:panelGroup style="margin-left: 250px">	
+					<h:graphicImage url="IMG/matricula.jpg"/>
+						
+					<h:outputLabel for="matricula"
+						value="Matrícula: "/>
+				</h:panelGroup>	
+				<h:inputText id="matricula" for="matriculaUsuario"
+					validatorMessage="A matrícula do usário deve ter entre 2 e 14 caracteres"
+					value="#{cadastroUsuarioMBean.usuario.matricula}"
+					converterMessage="Informe apenas números no campo Matrícula">>
+					<f:validateLength minimum="2" maximum="14"/>
+					<h:message for="matriculaUsuario"/>
+				</h:inputText>
+					
+				<h:panelGroup style="margin-left: 250px">	
+					<h:graphicImage url="IMG/nome.jpg"/>
+						
+					<h:outputLabel for="nome"
+						value="Nome: "/>
+				</h:panelGroup>		
+				<h:inputText id="nome" for="nomeUsuario"
+					validatorMessage="O nome do usuário deve ter entre 4 e 40 caracteres"
+					value="#{cadastroUsuarioMBean.usuario.nomeUsuario}">
+					<f:validateLength minimum="4" maximum="40"/>
+					<h:message for="nomeUsuario"/>
+				</h:inputText>		
+				
+				<h:panelGroup style="margin-left: 250px">		
+					<h:graphicImage url="IMG/email.png"/>
+							
+					<h:outputLabel for="email"	
+							value="Email: "/>	
+				</h:panelGroup>			
+				<h:inputText id="email"
+					value="#{cadastroUsuarioMBean.usuario.email}"/>
+				
+				<h:panelGroup style="margin-left: 250px">	
+					<h:graphicImage url="IMG/senha.png"/>
+						
+					<h:outputLabel for="senha"
+						value="Senha: "/>
+				</h:panelGroup>		
+				<h:inputSecret id="senha" for="senhaUsuario"
+					validatorMessage="O campo senha deve ter entre 2 e 20 caracteres"
+					value="#{cadastroUsuarioMBean.usuario.senha}">
+					<f:validateLength minimum="2" maximum="20"/>
+					<h:message for="senhaUsuario"/>
+				</h:inputSecret>	
+				
+				<h:panelGroup style="margin-left: 250px">	
+					<h:graphicImage url="IMG/tipousuario.jpg"/>
+						
+					<h:outputLabel for="tipo"
+						value="Tipo de usuário: "/>
+				</h:panelGroup>		
+				<h:selectOneRadio id="tipo"
+					value="#{cadastroUsuarioMBean.usuario.tipo}"
+					layout="lineDirection">	
+					<f:selectItem 
+						itemLabel="Aluno" 
+						itemValue="Aluno"/>	
+					<f:selectItem 
+						itemLabel="Professor" 
+						itemValue="Professor"/>	
+				</h:selectOneRadio>
+				
+				<h:outputLabel for="foto" value="Foto:" style="margin-left: 250px"/>
+       			<p:fileUpload id="foto" mode="simple" 
+       				value="#{cadastroUsuarioMBean.usuario.arquivo}"/>
+				
+				<h:commandButton value="#{cadastroUsuarioMBean.usuario.idUsuario == 0 ? 'Cadastrar' : 'Editar'}" 
+					action="#{cadastroUsuarioMBean.cadastrar}"
+					style="margin-left: 350px"/>
+				
+				<h:commandButton value="Cancelar" immediate="true"
+					action="/login.xhtml"/>
+				
+				<br/> 
+						
+			</h:panelGrid>
+		
+		</div>
+		
+		</h:form>
+	
+	</ui:define>
+</ui:composition>
+	
+	

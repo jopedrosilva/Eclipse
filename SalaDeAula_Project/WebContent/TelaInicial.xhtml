@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<h:head>
+		<title>Sala de Aula</title>
+	</h:head>
+	<h:body>
+		<h:form>
+		    <p:tabView>
+		        <p:tab title="Cursos">
+			        <h:panelGrid columns="2" cellpadding="10"  style="width: 100%; text-Align: center">
+			            <p:graphicImage width="100" height="100" library="images" name="Adicionar_Curso.jpg" />
+			            <p:button outcome="Cadastro_Curso.xhtml" value="Adicionar Curso">
+    						<f:param name="productId1" value="10" />
+						</p:button>
+		                <p:outputLabel value="Nome do Curso:" for="nomeCurso" />
+        				<p:autoComplete id="nomeCurso" value=""/>
+        				<p:outputLabel value="Código do Curso:" for="codigoCurso" />
+        				<p:autoComplete id="codigoCurso" value=""/>
+        				<p:button  value="Buscar Curso">
+    						<f:param name="productId1" value="10" />
+						</p:button>
+						<p:button  value="Cancelar">
+    						<f:param name="productId" value="10" />
+						</p:button>
+		            </h:panelGrid>
+		        </p:tab>
+		        
+		        
+		        <p:tab title="Turmas">
+		            <h:panelGrid columns="2" cellpadding="10"  style="width: 100%; text-Align: center">
+			            <p:graphicImage width="100" height="100" library="images" name="Adicionar_Turma.png" />
+			            <p:button outcome="Cadastro_Turma.xhtml" value="Adicionar Turma">
+    						<f:param name="productId" value="10" />
+						</p:button>
+		                <p:outputLabel value="Nome da Turma:" for="nomeTurma" />
+        				<p:autoComplete id="nomeTurma" value=""/>
+        				<p:outputLabel value="Código da Turma:" for="codigoTurma" />
+        				<p:autoComplete id="codigoTurma" value=""/>
+        				<p:button  value="Buscar Turma">
+    						<f:param name="productId" value="10" />
+						</p:button>
+						<p:button  value="Cancelar">
+    						<f:param name="productId" value="10" />
+						</p:button>
+		            </h:panelGrid>
+		        </p:tab>
+		        
+		        
+		        <p:tab title="Usuários">
+		            <h:panelGrid columns="2" cellpadding="10"  style="width: 100%; text-Align: center">
+			            <p:graphicImage width="100" height="100" library="images" name="Usuario.png" />
+			            <p:button outcome="Cadastro_Usuario.xhtml" value="Adicionar Usuário">
+    						<f:param name="Adicionar" value="10" />
+						</p:button>
+		                <p:outputLabel value="Email do Usuário:" for="emailUsuario" />
+        				<p:autoComplete id="emailUsuario" value=""/>
+        				<p:outputLabel value="Nome do Usuário:" for="nomeUsuario" />
+        				<p:autoComplete id="nomeUsuario" value=""/>
+        				<p:button  value="Buscar Usuário">
+    						<f:param name="productId3" value="10" />
+						</p:button>
+						<p:button  value="Cancelar">
+    						<f:param name="productId" value="10" />
+						</p:button>
+		            </h:panelGrid>
+		        </p:tab>
+		    </p:tabView>
+</h:form>
+	</h:body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title> K19 Treinamentos </title>
+	</h:head>
+	<h:body>
+	
+		<h3>Tags Preferidas</h3>
+		
+		<!-- Exemplo 1 -->
+		
+		<p>Autocomplete:</p>
+		<h:panelGrid columns="2">
+
+			<h:outputLabel value="Valor :"/>
+			<p:autoComplete
+				value="#{autoCompleteBean.value}"
+				completeMethod="#{autoCompleteBean.completeMethod}"
+				minQueryLength="3"
+				effect="fade"
+				effectDuration="400"
+				queryDelay="1000"/>
+			<h:outputLabel value="Valores:"/>
+			<p:autoComplete
+				value="#{autoCompleteBean.values}"
+				completeMethod="#{autoCompleteBean.completeMethod}"
+				minQueryLength="4"
+				maxResults="5"
+				effect="blind"
+				effectDuration="600"
+				queryDelay="500"
+				multiple="true"/>
+		</h:panelGrid>
+		
+		<!-- Exemplo 2 -->
+		
+		<p>Calendário:</p>
+		<h:outputScript name="calendar.js" library="js" target="head"/>
+		<h:form>
+			<h:panelGrid columns="2">
+				<h:outputLabel value="Data de nascimento:"/>
+				<p:calendar
+				value="#{calendarBean.dataDeNascimento}"
+				locale="pt_BR"
+				mode="inline"/>
+				
+				<h:outputLabel value="Data de nascimento:"/>
+				<p:calendar
+				value="#{calendarBean.dataDeNascimento}"
+				locale="pt_BR"
+				effect="slide"/> 
+				
+				<h:outputLabel value="Data de nascimento:"/>
+				<p:calendar
+				value="#{calendarBean.dataDeNascimento}"
+				locale="pt_BR"
+				showOn="button"
+				effect="fold"/>
+				
+				<h:outputLabel value="Data de nascimento:"/>
+				<p:calendar
+				value="#{calendarBean.dataDeNascimento}"
+				locale="pt_BR"
+				navigator="true"
+				effect="slideDown"/>
+			</h:panelGrid>
+		</h:form>
+		
+		<!-- Exemplo 3 -->
+		
+		<p>Spinner:</p>
+		<p:spinner/>
+		
+		<!-- Exemplo 4 -->
+		
+		<p>Placar:</p>
+		<h:form>
+			<h:outputText
+				id="placar"
+				value="#{pollBean.placarTimeA} X #{pollBean.placarTimeB}"/>
+	
+			<p:poll
+				interval="1"
+				listener="#{pollBean.update}"
+				update="placar"/>
+		</h:form>
+	</h:body>
+</html>

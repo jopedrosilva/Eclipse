@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<h:head>
+		
+		<link rel="stylesheet" type="text/css" href="Style/Estilo.css"/>
+		<link rel="stylesheet" type="text/css" href="mdl/material.css"/>
+		<link rel="stylesheet" type="text/css" href="mdl/material.min.css"/>
+		<script type="text/javascript" src="mdl/material.js"/>
+		<script type="text/javascript" src="mdl/material.min.js"/>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>Login</title>
+		
+	</h:head>
+	<h:body>
+	
+	     <h:form>
+	        
+	        <p:growl/>
+	        	
+	        <div class="container" style="color:#BDBDBD">
+	        	
+	        	<div class="col-lg-12" style="text-align: center;">	
+				<img src="IMG/cadastro.png" style="height: 100px; width: 100px; margin-top: 40px"/>	
+				<a href="cadastroUsuario.xhtml" style="background-color: black;" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+      				<i class="material-icons">add</i>
+    			</a>
+			</div> 
+	        	
+	        	<h:panelGrid columns="2">
+				
+					<h:panelGroup style="margin-left: 650px">		
+						<h:graphicImage url="IMG/email.png"/>
+						&nbsp;&nbsp;&nbsp;	
+						<h:outputLabel for="email" value="Email: "/>	
+					</h:panelGroup>	
+					<h:inputText styleClass="campoTexto" id="email"
+						value="#{loginMBean.usuario.email}"/>	
+					
+					<h:panelGroup style="margin-left: 650px">	
+						<h:graphicImage url="IMG/senha.png"/>
+						&nbsp;&nbsp;&nbsp;	
+						<h:outputLabel for="senha" value="Senha: "/>
+					</h:panelGroup>	
+					<h:inputSecret id="senha" styleClass="campoTexto"
+						value="#{loginMBean.usuario.senha}"/>
+						
+						<h:outputText id="txt_count" value="#{counterView.number}" />
+	    				<p:poll interval="1" listener="#{counterView.increment}" update="txt_count" />
+				
+				</h:panelGrid>
+				
+				<h:commandButton style="background-color: black; margin-left: 850px;" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" 
+				value="Entrar"
+					action="#{loginMBean.autenticar}"/>
+	        
+	        </div>
+	        
+	        </h:form>
+		
+	</h:body>
+</html>

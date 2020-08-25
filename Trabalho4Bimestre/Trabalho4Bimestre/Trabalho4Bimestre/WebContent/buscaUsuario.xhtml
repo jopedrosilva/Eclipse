@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+	
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>Consulta de Usuário</title>
+	</h:head>
+	<h:body style="background-image:url(IMG/fundo.jpg);margin:100px;">
+	
+		<h:form style="color: white">
+			
+			<div class="container" style="background-image:url(IMG/Login.jpg)">	
+	
+			<div class="col-lg-12" style="text-align: center; margin-top: 125px">	
+				<img src="IMG/cadastro.png" style="height: 100px; width: 100px; margin-top: 40px"/>	
+			</div> 
+				
+			<br/>
+		
+			<h:panelGrid columns="2">
+				
+				<h:panelGroup style="margin-left: 450px">		
+					<h:graphicImage url="IMG/email.png"/>
+					&nbsp;&nbsp;&nbsp;	
+					<h:outputLabel for="email" value="Email: "/>	
+				</h:panelGroup>	
+				<h:inputText id="email"
+					value="#{consultaUsuarioMBean.usuarioBusca.email}"/>	
+				
+				<h:panelGroup style="margin-left: 450px">	
+					<h:graphicImage url="IMG/nome.jpg"/>
+					&nbsp;&nbsp;&nbsp;	
+					<h:outputLabel for="nome" value="Nome: "/>
+				</h:panelGroup>	
+				<h:inputText id="nome"
+					value="#{consultaUsuarioMBean.usuarioBusca.nomeUsuario}"/>
+				
+				<h:selectBooleanCheckbox id="mostrarTodos"
+					value="#{consultaUsuarioMBean.mostrarTodos}"
+					style="margin-left: 450px"/>
+				<h:outputLabel for="mostrarTodos" 
+					value="Mostrar todos os dados do usuário"/>
+				
+				<h:commandButton value="Buscar"
+					action="#{consultaUsuarioMBean.buscar}"
+					style="margin-left: 450px"/>
+				
+				<h:commandButton value="Cancelar"
+					action="/inicioUsuario.xhtml"/>	
+				
+			</h:panelGrid>
+			
+			<h:dataTable 
+				value="#{consultaUsuarioMBean.usuariosEncontrados}"	
+				var="usuario"
+				rendered="#{not empty consultaUsuarioMBean.usuariosEncontrados}"
+				style="margin-left: 450px">	
+			
+				<f:facet name="header">Lista de Usuários</f:facet>
+				
+				<h:column>
+					<f:facet name="header">Matrícula</f:facet>
+					#{usuario.matricula}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Nome</f:facet>
+					#{usuario.nomeUsuario}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Email</f:facet>
+					#{usuario.email}
+				</h:column>
+				
+				<h:column rendered="#{consultaUsuarioMBean.mostrarTodos}">	
+					<f:facet name="header">Tipo</f:facet>
+					#{usuario.tipo}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Opções</f:facet>
+					
+					<h:commandButton value="Editar"
+						action="#{cadastroUsuarioMBean.iniciarEdicao(usuario)}"/>	
+								
+					<h:commandButton value="Remover"
+						action="#{consultaUsuarioMBean.remover(usuario)}"/>	
+				</h:column>
+				
+			</h:dataTable>
+			
+		</div>	
+			
+		</h:form>
+	
+	</h:body>
+</html>

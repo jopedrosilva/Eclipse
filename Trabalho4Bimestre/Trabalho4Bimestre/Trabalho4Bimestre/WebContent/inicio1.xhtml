@@ -1,0 +1,349 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<h:head>
+		<link rel="stylesheet" type="text/css" href="Style/Estilo.css"/>
+		<link rel="stylesheet" type="text/css" href="mdl/material.css"/>
+		<link rel="stylesheet" type="text/css" href="mdl/material.min.css"/>
+		<script type="text/javascript" src="mdl/material.js"/>
+		<script type="text/javascript" src="mdl/material.min.js"/>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>Cadastro Aluno</title>
+	</h:head>
+	<h:body>
+		<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header
+	                mdl-layout--fixed-tabs">
+	      <header class="mdl-layout__header" style="background-color: black;">
+	        <div class="mdl-layout__header-row">
+	          <!-- Title -->
+	          <span class="mdl-layout-title">Sala de Aula</span>
+	        </div>
+	        <!-- Tabs -->
+	        <div class="mdl-layout__tab-bar mdl-js-ripple-effect" style="background-color: black;">
+	          <a href="#fixed-tab-1" class="mdl-layout__tab is-active">Cursos</a>
+	          <a href="#fixed-tab-2" class="mdl-layout__tab">Turmas</a>
+	          <a href="#fixed-tab-3" class="mdl-layout__tab">Usuários</a>
+	        </div>
+	      </header>
+	      <div class="mdl-layout__drawer">
+	        <span class="mdl-layout-title">Menu</span>
+	        <span class="mdl-layout-title">
+	        <h:form>
+	        	<h:commandLink action="#{loginMBean.logoff}">Sair</h:commandLink>
+	        </h:form>	
+	        </span>
+	      </div>
+	      <main class="mdl-layout__content">
+	        <section class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
+	          <div class="page-content">
+
+	          	<h:form>
+		
+		<div class="container">	
+	
+			<div class="col-lg-12" style="text-align: center;">	
+				<img src="IMG/busca.png" style="height: 100px; width: 100px; margin-top: 40px"/>
+				<a href="cadastroCurso.xhtml" style="background-color: black;" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+      				<i class="material-icons">add</i>
+    			</a>	
+			</div> 
+				
+			<br/>
+			<h:panelGrid columns="2">
+				<h:panelGroup style="margin-left: 450px">		
+					<h:graphicImage url="IMG/nome.jpg"/>
+					&nbsp;&nbsp;&nbsp;
+					<h:outputLabel for="nomeCurso" value="Nome: "/>
+				</h:panelGroup>	
+				
+				<h:inputText id="nomeCurso" styleClass="campoTexto"
+					value="#{consultaCursoMBean.cursoBusca.nomeCurso}"/>
+								
+				<h:panelGroup style="margin-left: 450px">	
+					<h:graphicImage url="IMG/codigo.png"/>	
+					&nbsp;&nbsp;&nbsp;	
+					<h:outputLabel for="codigoCurso" value="Código: "/>	
+				</h:panelGroup>	
+				
+				<h:inputText id="codigoCurso" styleClass="campoTexto"
+					value="#{consultaCursoMBean.cursoBusca.codigoCurso}"/>
+							
+				<h:selectBooleanCheckbox id="mostrarTodos"
+					value="#{consultaCursoMBean.mostrarTodos}"
+					style="margin-left: 450px"/>
+				<h:outputLabel for="mostrarTodos" 
+					value="Mostrar todos os dados do curso"/>
+				
+				<h:commandButton style="background-color: black; margin-left: 450px;"
+				 class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" value="Buscar"
+					action="#{consultaCursoMBean.buscar}">
+					<f:ajax event="click"
+							execute="@form"
+							render="@form"
+							listener="#{consultaCursoMBean.buscar}"/>
+					</h:commandButton>
+				
+				<h:commandButton style="background-color: black;" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" value="Cancelar"
+					action="/inicio1.xhtml"/>	
+				
+			</h:panelGrid>
+			
+			<h:dataTable 
+				value="#{consultaCursoMBean.cursosEncontrados}"	
+				var="curso"
+				rendered="#{not empty consultaCursoMBean.cursosEncontrados}"
+				style="margin-left: 450px">	
+			
+				<f:facet name="header"><h4>Lista de Cursos</h4></f:facet>
+				
+				<h:column>
+					<f:facet name="header">Nome</f:facet>
+					#{curso.nomeCurso}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Código</f:facet>
+					#{curso.codigoCurso}
+				</h:column>
+				
+				<h:column rendered="#{consultaCursoMBean.mostrarTodos}">	
+					<f:facet name="header">Descrição</f:facet>
+					#{curso.descricao}
+				</h:column>
+				
+				<h:column rendered="#{consultaCursoMBean.mostrarTodos}">	
+					<f:facet name="header">Carga Horária</f:facet>
+					#{curso.cargahoraria}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Opções</f:facet>
+					
+					<h:commandButton  style="background-color: green" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" value="Editar"
+						action="#{cadastroCursoMBean.iniciarEdicao(curso)}"/>	
+								
+					<h:commandButton  style="background-color: red" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" value="Remover"
+						action="#{consultaCursoMBean.remover(curso)}"/>	
+				</h:column>
+				
+				<br/> <br/> <br/>
+				
+			</h:dataTable>
+			
+		</div>
+			
+		</h:form>
+	          	
+	          </div>
+	        </section>
+	        <section class="mdl-layout__tab-panel" id="fixed-tab-2">
+	          <div class="page-content">
+	          	
+	          	<h:form>
+		
+			<div class="container">	
+	
+			<div class="col-lg-12" style="text-align: center;">	
+				<img src="IMG/cadastro.png" style="height: 100px; width: 100px; margin-top: 40px"/>	
+				<a href="cadastroTurma.xhtml" style="background-color: black;" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+      				<i class="material-icons">add</i>
+    			</a>
+			</div> 
+		
+			<h:panelGrid columns="2">
+				
+				<h:panelGroup style="margin-left: 450px">	
+					<h:graphicImage url="IMG/nome.jpg"/>
+					&nbsp;&nbsp;&nbsp;
+					<h:outputLabel for="nome" value="Nome: "/>
+				</h:panelGroup>
+				
+				<h:inputText id="nome" styleClass="campoTexto"
+					value="#{consultaTurmaMBean.turmaBusca.nomeTurma}"/>
+				
+				<h:panelGroup style="margin-left: 450px">	
+					<h:graphicImage url="IMG/codigo.png"/>
+					&nbsp;&nbsp;&nbsp;	
+					<h:outputLabel for="codigo" value="Código: "/>	
+				</h:panelGroup>	
+				
+				<h:inputText id="codigo" styleClass="campoTexto"
+					value="#{consultaTurmaMBean.turmaBusca.codigoTurma}"/>
+				
+				<h:selectBooleanCheckbox id="mostrarTodas"
+					value="#{consultaTurmaMBean.mostrarTodas}"
+					style="margin-left: 450px"/>
+				<h:outputLabel for="mostrarTodas" 
+					value="Mostrar todos os dados da turma"/>
+				
+				<h:commandButton style="background-color: black; margin-left: 450px" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" 
+				value="Buscar">
+					<f:ajax event="click"
+							execute="@form"
+							render="@form"
+							listener="#{consultaTurmaMBean.buscar}"/>
+					</h:commandButton>
+				
+				<h:commandButton  style="background-color: black;" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" value="Cancelar"
+					action="/inicio1.xhtml"/>	
+				
+			</h:panelGrid>
+			
+			<h:dataTable 
+				value="#{consultaTurmaMBean.turmasEncontradas}"	
+				var="turma"
+				rendered="#{not empty consultaTurmaMBean.turmasEncontradas}"
+				style="margin-left: 450px">	
+			
+				<f:facet name="header">Lista de Turmas</f:facet>
+				
+				<h:column>
+					<f:facet name="header">Nome</f:facet>
+					#{turma.nomeTurma}
+				</h:column>
+				
+				<h:column >
+					<f:facet name="header">Código</f:facet>
+					#{turma.codigoTurma}
+				</h:column>
+				
+				<h:column rendered="#{consultaTurmaMBean.mostrarTodas}">	
+					<f:facet name="header">Quantidade de vagas</f:facet>
+					#{turma.qtdvagas}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Opções</f:facet>
+					
+					<h:commandButton  style="background-color: green" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" value="Editar"
+						action="#{cadastroTurmaMBean.iniciarEdicao(turma)}"/>	
+								
+					<h:commandButton  style="background-color: red" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" value="Remover"
+						action="#{consultaTurmaMBean.remover(turma)}"/>	
+				</h:column>
+				
+				<br/> <br/> <br/>
+				
+			</h:dataTable>
+			
+		</div>
+			
+		</h:form>
+	          	
+	          </div>
+	        </section>
+	        <section class="mdl-layout__tab-panel" id="fixed-tab-3">
+	          <div class="page-content">
+				
+				<h:form>
+			
+			<div class="container">	
+	
+			<div class="col-lg-12" style="text-align: center;">	
+				<img src="IMG/cadastro.png" style="height: 100px; width: 100px; margin-top: 40px"/>	
+				<a href="cadastroUsuario.xhtml" style="background-color: black;" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+      				<i class="material-icons">add</i>
+    			</a>
+			</div> 
+				
+			<br/>
+		
+			<h:panelGrid columns="2">
+				
+				<h:panelGroup style="margin-left: 450px">		
+					<h:graphicImage url="IMG/email.png"/>
+					&nbsp;&nbsp;&nbsp;	
+					<h:outputLabel for="email" value="Email: "/>	
+				</h:panelGroup>	
+				<h:inputText styleClass="campoTexto" id="email"
+					value="#{consultaUsuarioMBean.usuarioBusca.email}"/>	
+				
+				<h:panelGroup style="margin-left: 450px">	
+					<h:graphicImage url="IMG/nome.jpg"/>
+					&nbsp;&nbsp;&nbsp;	
+					<h:outputLabel for="nome" value="Nome: "/>
+				</h:panelGroup>	
+				<h:panelGroup>
+					<h:inputText id="nome" styleClass="campoTexto"
+						value="#{consultaUsuarioMBean.usuarioBusca.nomeUsuario}"
+						validatorMessage="O nome do usuário deve ter entre 4 e 40 caracteres">
+						<f:validateLength minimum="4" maximum="40"/>
+					</h:inputText>	
+					<h:message for="nomeUsuario"/>
+				</h:panelGroup>
+				
+				<h:selectBooleanCheckbox id="mostrarTodos"
+					value="#{consultaUsuarioMBean.mostrarTodos}"
+					style="margin-left: 450px"/>
+				<h:outputLabel for="mostrarTodos" 
+					value="Mostrar todos os dados do usuário"/>
+				
+				<h:commandButton style="background-color: black; margin-left: 450px;" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" 
+				value="Buscar">
+					<f:ajax event="click"
+							execute="@form"
+							render="@form"
+							listener="#{consultaUsuarioMBean.buscar}"/>
+					</h:commandButton>
+				
+				<h:commandButton style="background-color: black" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" value="Cancelar"
+					action="/inicio1.xhtml"/>	
+				
+			</h:panelGrid>
+			
+			<h:dataTable 
+				value="#{consultaUsuarioMBean.usuariosEncontrados}"	
+				var="usuario"
+				rendered="#{not empty consultaUsuarioMBean.usuariosEncontrados}"
+				style="margin-left: 450px">	
+			
+				<f:facet name="header">Lista de Usuários</f:facet>
+				
+				<h:column>
+					<f:facet name="header">Matrícula</f:facet>
+					#{usuario.matricula}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Nome</f:facet>
+					#{usuario.nomeUsuario}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Email</f:facet>
+					#{usuario.email}
+				</h:column>
+				
+				<h:column rendered="#{consultaUsuarioMBean.mostrarTodos}">	
+					<f:facet name="header">Tipo</f:facet>
+					#{usuario.tipo}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Opções</f:facet>
+					
+					<h:commandButton style="background-color: green" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" value="Editar"
+						action="#{cadastroUsuarioMBean.iniciarEdicaoUsuario(usuario)}"/>	
+								
+					<h:commandButton style="background-color: red" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" value="Remover"
+						action="#{consultaUsuarioMBean.remover(usuario)}"/>	
+				</h:column>
+		    
+			</h:dataTable>
+			
+		</div>
+			
+		</h:form>
+	
+				
+	          </div>
+	        </section>
+	      </main>
+	    </div>
+	</h:body>
+</html>

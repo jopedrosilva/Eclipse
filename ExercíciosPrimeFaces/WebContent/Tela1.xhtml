@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title> Principal </title>
+	</h:head>
+	<h:body>
+	
+		<!-- Panel: Layout -->
+	
+		<p:layout style="min-width:100px;min-height:700px;">
+	    	<p:layoutUnit position="west" size="100" minSize="300" maxSize="300">
+	        	
+	        	<!-- Menu: PanelMenu -->
+	        	
+	        	<h:form>
+				 
+				    <p:panelMenu style="width:100%">
+				        <p:submenu label="Menu">
+				            <p:menuitem value="Tela 1" outcome="Tela1.xhtml" icon="ui-icon-disk"/>
+				            <p:menuitem value="Tela 2" outcome="Tela2.xhtml" icon="ui-icon-arrowrefresh-1-w" />
+				        </p:submenu>
+				    </p:panelMenu>
+				</h:form>
+	        	
+	    	</p:layoutUnit>
+ 
+	    	<p:layoutUnit position="center">
+	        	
+	        	<h:form>
+	        	
+	        		<!-- Input: Autocompletar -->
+					
+				    <p>Nome:</p>
+				    <p:autoComplete id="nome" value="" completeMethod="#{inputTextareaView.completeArea}" />
+					 
+	        		<!-- Input: Slider -->
+	        		
+					<p>Idade:</p>
+				    <h:panelGrid columns="1" style="margin-bottom: 10px">
+					    <p:inputText id="txt1" value="#{sliderView.number1}" />
+					    <p:slider for="txt1" />
+					</h:panelGrid>
+					
+					<!-- Input: password -->
+					
+					<p>Senha:</p>
+        			<p:password id="nonFeedback" value="#{sliderView.password1}" />
+        			
+	        		<!-- Input: InputTextarea -->
+	        		             
+				    <p>Descrição:</p>
+				    <p:inputTextarea rows="10" cols="50" completeMethod="#{inputTextareaView.completeArea}" queryDelay="750" minQueryLength="4" />
+					
+					<!-- Button: CommandButton -->
+					
+					<br/>
+					<p:commandButton value="Cadastrar" id="ajax"  actionListener="#{buttonView.buttonAction}" styleClass="ui-priority-primary" />
+				</h:form>
+	        	
+	    	</p:layoutUnit>
+		</p:layout>
+	</h:body>
+</html>

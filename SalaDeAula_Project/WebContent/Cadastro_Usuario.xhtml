@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<h:head>		
+		<title>Sala de Aula</title>
+		<style>
+			body {
+				background-color: rgb(227, 227, 227);
+			}
+		</style>
+	</h:head>
+	<h:body>
+		<h:form>
+		<div class="p-grid" style="width: 100%">
+    		<div class="p-col">
+        		<div class="box" style="text-align: center; width: 100%">
+        		<h:panelGrid columns="2" cellpadding="10" style="width: 100%">
+				<p:graphicImage width="100" height="100" library="images" name="Usuario.png" />
+				<h1 style="color: white">Usuário</h1>
+				<p:outputLabel value="Nome:" for="nomeUsuario" />
+		        <p:autoComplete id="nomeUsuario" value=""/>
+		        <p:outputLabel value="Matrícula:" for="matriculaUsuario" />
+		       	<p:autoComplete id="matriculaUsuario" value=""/>
+		        				
+		        <p:outputLabel value="Email:" for="emailUsuario" />
+		        <p:autoComplete id="emailUsuario" value=""/>
+		        <p:outputLabel value="Senha:" for="senhaUsuario" />
+		        <p:autoComplete id="senhaUsuario" value=""/>
+		        <p:outputLabel value="Confirmar Senha:" for="confirmarSenha" />
+		        <p:autoComplete id="confirmarSenha" value=""/>
+		        				
+		        <h1></h1>
+				<p:button outcome="TelaInicial.xhtml" value="Cancelar">
+		    		<f:param name="productId" value="10" />
+				</p:button>
+			</h:panelGrid>
+        		</div>
+    		</div>
+    
+		</div>
+		</h:form>
+	</h:body>
+</html>

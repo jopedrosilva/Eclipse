@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;PreferenceTagsPrimeFaces/WebContent/auto-complete.xhtml&apos; to &apos;Exercicio3.xhtml&apos;" description="Rename resource &apos;auto-complete.xhtml&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="WebContent/auto-complete.xhtml" name="Exercicio3.xhtml" stamp="1535045851391" updateReferences="true"/>
+</session>
